@@ -1,5 +1,6 @@
 from random import choice, randint
 import csv
+import json
 
 # Append new words in 'learning now' file
 def next_step():

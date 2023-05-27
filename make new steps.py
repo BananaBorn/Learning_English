@@ -1,30 +1,57 @@
 import csv
 
-# {'eng' : '', 'rus' : '', 'accent' : '', 'counter' : 0},
+# Checks just 'y'\'n' input
+def yes_or_no():
+    while True:
+        answer = input("Всё введено правильно? 'y'\'n' >>> ")
+        if answer == 'y':
+            break
+        elif answer == 'n':
+            print('Ввод отменён')
+            return True
+        else:
+            print('\nНеправильный ввод!\n')
+            continue
 
-step_1 = [
-    {'eng' : 'i', 'rus' : 'я', 'accent' : 'ай', 'counter' : 0},
-    {'eng' : 'he', 'rus' : "он", 'accent' : 'хи', 'counter' : 0},
-    {'eng' : 'she', 'rus' : "она", 'accent' : 'щи', 'counter' : 0},
-    {'eng' : 'you', 'rus' : "ты", 'accent' : 'ю', 'counter' : 0},
-    {'eng' : 'they', 'rus' : "они", 'accent' : 'зей', 'counter' : 0},
-    {'eng' : 'we', 'rus' : "мы", 'accent' : 'ви', 'counter' : 0},
-    {'eng' : 'me', 'rus' : "мне", 'accent' : 'ми', 'counter' : 0},
-    {'eng' : 'them', 'rus' : "им", 'accent' : 'зем', 'counter' : 0},
-    {'eng' : 'is', 'rus' : "есть", 'accent' : 'из', 'counter' : 0},
-    {'eng' : 'are', 'rus' : "есть", 'accent' : 'а:', 'counter' : 0},
-    {'eng' : 'it', 'rus' : "это", 'accent' : 'ит', 'counter' : 0},
-    {'eng' : 'him', 'rus' : "ему", 'accent' : 'хим', 'counter' : 0},
-    {'eng' : 'my', 'rus' : "моё", 'accent' : 'май', 'counter' : 0},
-    {'eng' : 'your', 'rus' : "твоё", 'accent' : 'йор', 'counter' : 0},
-    {'eng' : 'ours', 'rus' : "наше", 'accent' : 'ауерс', 'counter' : 0},
-    {'eng' : 'his', 'rus' : "его", 'accent' : 'хиз', 'counter' : 0},
-    {'eng' : 'her', 'rus' : "её", 'accent' : 'хё', 'counter' : 0},
-    {'eng' : 'us', 'rus' : "нам", 'accent' : 'ас', 'counter' : 0}
-    ]
+# Checks name of new file for originality
+def check_step(n):
+    try:
+        with open(f'{n}_step.csv', 'r') as x:
+            None
+            return False
+    except:
+        return True
 
-with open('1_step.csv', 'w', newline ='') as file:
-    head = ['eng', 'rus', 'accent', 'counter']
-    writer = csv.DictWriter(file, fieldnames=head, delimiter=';')
+while True:
+    step = input('Введите ЦИФРОЙ номер файла для новых слов >>> ')
+    if step.isdigit():
+        if check_step(step):
+            file_name = f'{step}_step.csv'
+            break
+        else:
+            print('\nТакой файл уже есть!\n')
+            continue
+    else:
+        print('\nНеправильный ввод!\n')
+
+new_words = []
+print('\nДля создания нового файла нужно ввести 30 новых слов\n')
+while len(new_words) < 30:
+    eng_word = input('Слово на английском >>> ')
+    rus_word = input('Слово на русском >>> ')
+    pronunciation = input('Как произносится >>> ')
+    restart = yes_or_no()
+    if restart:
+        continue
+    else:
+        new_word = dict(eng=eng_word, rus=rus_word,
+                        accent=pronunciation, counter=0)
+        new_words.append(new_word)
+
+with open(file_name, 'w', newline ='') as file:
+    header = ['eng', 'rus', 'accent', 'counter']
+    writer = csv.DictWriter(file, fieldnames=header, delimiter=';')
     writer.writeheader()
-    writer.writerows(step_1)
+    writer.writerows(new_words)
+print("Новый файл успешно создан")
+print("Название файла ->", f'"{file_name}"')

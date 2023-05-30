@@ -57,4 +57,3 @@ with open(file_name, 'w', newline='', encoding='utf-8-sig') as file:
     writer.writerows(new_words)
 print("Новый файл успешно создан")
 print("Название файла ->", f'"{file_name}"')
-

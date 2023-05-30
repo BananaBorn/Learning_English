@@ -32,5 +32,4 @@ while True:
     except:
         # new_user()
         print('Имя пользователя не найдено')
-
-    break
+break

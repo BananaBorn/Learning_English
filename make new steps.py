@@ -1,5 +1,6 @@
 import csv
 
+
 # Checks just 'y'\'n' input
 def yes_or_no():
     while True:
@@ -13,14 +14,15 @@ def yes_or_no():
             print('\nНеправильный ввод!\n')
             continue
 
+
 # Checks name of new file for originality
 def check_step(n):
     try:
         with open(f'{n}_step.csv', 'r') as x:
-            None
             return False
     except:
         return True
+
 
 while True:
     step = input('Введите ЦИФРОЙ номер файла для новых слов >>> ')
@@ -48,7 +50,7 @@ while len(new_words) < 30:
                         accent=pronunciation, counter=0)
         new_words.append(new_word)
 
-with open(file_name, 'w', newline ='') as file:
+with open(file_name, 'w', newline='', encoding='utf-8-sig') as file:
     header = ['eng', 'rus', 'accent', 'counter']
     writer = csv.DictWriter(file, fieldnames=header, delimiter=';')
     writer.writeheader()

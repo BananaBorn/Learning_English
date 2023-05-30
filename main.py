@@ -2,9 +2,11 @@ from random import choice, randint
 import csv
 import json
 
+
 # Append new words in 'learning now' file
 def next_step():
-    None
+    pass
+
 
 # Choice language for words, to show you
 def en_or_ru():
@@ -14,11 +16,13 @@ def en_or_ru():
     else:
         return 'rus'
 
+
 def choice_user(names):
-    None
+    pass
+
 
 def new_user():
-    None
+    pass
 
 
 while True:
@@ -27,7 +31,6 @@ while True:
             users = json.load(users_file)
     except:
         # new_user()
-        None
+        print('Имя пользователя не найдено')
 
     break
-    
